@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fan Array Controller</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div id="setup-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal" class="close">&times;</span>
+            <h1>Setup Fan Dimensions</h1>
+            <form id="dimension-form">
+                <label for="rows">Rows:</label>
+                <input type="number" id="rows" name="rows" min="1" required>
+                <label for="columns">Columns:</label>
+                <input type="number" id="columns" name="columns" min="1" required>
+                <button type="submit">Set Dimensions</button>
+            </form>
+        </div>
+    </div>
+    <button id="open-modal">Configure Fan Dimensions</button>
+    <div class="container">
+        <h1>Fan Array Wind Tunnel Control</h1>
+        <div id="fan-controls" style="display:none;">
+            <div id="fan-grid"></div>
+            <input type="range" id="velocity" min="1" max="100" step="1">
+            <label for="velocity">Velocity: <span id="velocity-value">50</span>%</label>
+            <button id="apply-velocity">Apply Velocity</button>
+            <button id="stop-all">Stop All</button>
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

@@ -39,6 +39,7 @@ document.getElementById("apply-velocity").addEventListener("click", function () 
     const velocity = parseInt(document.getElementById("velocity").value, 10);
 
     const fanIds = selectedFans.map((fan) => parseInt(fan.textContent.split("\n")[0], 10)); // Get IDs
+    console.log(fanIds);
 
     fetch("/control-fans", {
         method: "POST",
@@ -62,6 +63,20 @@ document.getElementById("stop-all").addEventListener("click", function () {
             fan.dataset.velocity = 0; // Update velocity in data attribute
             fan.textContent = `${fan.textContent.split("\n")[0]}\n0%`; // Update displayed velocity
         });
+    });
+});
+
+document.getElementById("select-all").addEventListener("click", function () {
+    const fans = document.querySelectorAll(".fan");
+    fans.forEach((fan) => {
+        fan.classList.add("selected");
+    });
+});
+
+document.getElementById("unselect-all").addEventListener("click", function () {
+    const fans = document.querySelectorAll(".fan");
+    fans.forEach((fan) => {
+        fan.classList.remove("selected");
     });
 });
 

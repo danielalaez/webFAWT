@@ -1,3 +1,11 @@
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -46,6 +54,27 @@ button:hover {
     background-color: #0056b3;
 }
 
+#topbar {
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 60px;
+}
+
+.logo {
+    float: left;
+    margin-left: 20px;
+    margin-top: 18px;
+    font-size: 13pt;
+    font-weight: 600;
+}
+
+#open-modal{
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
 #fan-grid {
     display: grid; /* Use grid display for a proper matrix layout */
     grid-template-columns: repeat(auto-fit, 50px); /* Default to fitting elements with 50px width */
@@ -74,6 +103,7 @@ button:hover {
 
 .fan.selected {
     background-color: #add8e6; /* Highlight selected fans */
+    border: 1px solid #007bff;
 }
 
 

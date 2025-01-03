@@ -20,17 +20,27 @@
             </form>
         </div>
     </div>
-    <button id="open-modal">Configure Fan Dimensions</button>
+    
+    <div id="topbar">
+        <span class="logo">Fan Array Wind Tunnel Control</span>
+        <button id="open-modal">Configure Fan Dimensions</button>
+    </div>
+
     <div class="container">
-        <h1>Fan Array Wind Tunnel Control</h1>
         <div id="fan-controls" style="display:none;">
-            <div id="fan-grid"></div>
-            <input type="range" id="velocity" min="1" max="100" step="1">
-            <label for="velocity">Velocity: <span id="velocity-value">50</span>%</label>
+            <label for="velocity">Velocity: <span id="velocity-value">50</span>%</label> 
+            <input type="range" id="velocity" min="0" max="100" step="1">
+            
             <button id="apply-velocity">Apply Velocity</button>
             <button id="stop-all">Stop All</button>
+            <button id="select-all">Select All</button>
+            <button id="unselect-all">Unselect All</button>
         </div>
     </div>
+    <div class="container">
+        <div id="fan-grid"></div>
+    </div>
+    
     <script src="/static/script.js"></script>
 </body>
 </html>

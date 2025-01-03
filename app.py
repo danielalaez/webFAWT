@@ -5,8 +5,8 @@ import threading
 app = Flask(__name__)
 
 # Serial configuration to communicate with Arduino
-#SERIAL_PORT = '/dev/ttyUSB0'  # Replace with the actual port for your Arduino
-SERIAL_PORT = 'COM1'  # Replace with the actual port for your Arduino
+#SERIAL_PORT = '/dev/ttyUSB0'  # Ubuntu
+SERIAL_PORT = 'COM1'  # Windows - Replace with the actual port for your Arduino
 BAUD_RATE = 9600
 
 try:
@@ -15,7 +15,6 @@ except serial.SerialException as e:
     print(f"Error: {e}")
     print("Ensure the correct COM port is configured and the Arduino is connected.")
 
-# To prevent conflicts in serial communication, use a lock
 # To prevent conflicts in serial communication, use a lock
 serial_lock = threading.Lock()
 

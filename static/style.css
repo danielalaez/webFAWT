@@ -142,3 +142,25 @@ button:hover {
     color: black;
     text-decoration: none;
 }
+
+.status-flag {
+    margin-top: 10px;
+    padding: 10px;
+    font-weight: bold;
+    color: white;
+    background-color: green;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.status-flag.running {
+    background-color: orange;
+}
+
+.status-flag.idle {
+    background-color: green;
+}
+
+.status-flag.stopped {
+    background-color: red;
+}

@@ -7,20 +7,22 @@ app = Flask(__name__)
 
 # Serial configuration to communicate with Arduino
 #SERIAL_PORT = '/dev/ttyUSB0'  # Ubuntu
-SERIAL_PORT = 'COM1'  # Windows - Replace with the actual port for your Arduino
+SERIAL_PORT = 'COM8'  # Windows - Replace with the actual port for your Arduino
 BAUD_RATE = 9600
 fan_speeds = {}
 
 try:
-    arduino = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
+    arduino = serial.Serial(SERIAL_PORT, BAUD_RATE)
 except serial.SerialException as e:
-    print(f"Error: {e}")
-    print("Ensure the correct COM port is configured and the Arduino is connected.")
+    print(f"SerialException: {e}")
+except PermissionError as e:
+    print(f"PermissionError: {e}")
 
 # To prevent conflicts in serial communication, use a lock
 serial_lock = threading.Lock()
-stop_experiment = threading.Event()  # Event to stop the experiment
 
+time.sleep(5)
+stop_experiment = threading.Event()  # Event to stop the experiment
 
 @app.route('/')
 def index():
@@ -47,8 +49,9 @@ def control_fans():
     with serial_lock:
         for fan in selected_fans:
             command = f"{fan},{velocity}\n"
+            time.sleep(100/1000)
             print(command)
-            #arduino.write(command.encode())
+            arduino.write(command.encode())
 
     return jsonify({"status": "success"}), 200
 
@@ -58,8 +61,9 @@ def stop_all():
     with serial_lock:
         for fan in range(1, 37):  # Assuming a total of 36 fans
             command = f"{fan},0\n"
+            time.sleep(100/1000)
             print(command)
-            #arduino.write(command.encode())
+            arduino.write(command.encode())
 
     return jsonify({"status": "success"}), 200
 
@@ -88,8 +92,9 @@ def run_experiment(header, rows):
             for fan_id, velocity in zip(fan_ids, velocities):
                 fan_speeds[fan_id] = velocity
                 command = f"{fan_id},{velocity}\n"
+                time.sleep(100/1000)
                 print(command)
-                #arduino.write(command.encode())
+                arduino.write(command.encode())
 
         time.sleep(time_interval)  # Wait for the next time interval
     experiment_running = False  # Mark experiment as finished
@@ -108,4 +113,5 @@ def stop_experiment_route():
     return jsonify({"status": "success"}), 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    #threading.Thread(target=serial_reader, daemon=True).start()  # Run the serial reader in a separate thread
+    app.run(debug=True, use_reloader=False)

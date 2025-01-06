@@ -1,0 +1,16 @@
+On an Anaconda Prompt terminal:
+> pip install flask
+
+Check the COM port (if you are using windows) where the Arduino is connected (for example, COM8), and modify app.py accordingly: 
+SERIAL_PORT = 'COM8'  # Windows - Replace with the actual port for your Arduino
+
+Then navigate to the folder containing app.py:
+> python app.py
+
+If everything works well, the program should output the IP address on the terminal:
+* Running on http://127.0.0.1:5000/
+
+Open a new browser tab and paste the ip and port: http://127.0.0.1:5000/ (or the one printed in your terminal)
+
+Set the fan array size (6x6) and run. In the terminal you should see the messages sent to the Arduino board.
+
